@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JEE Mock Test Generator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-row">
+      <h1>JEE Mock Test Generator</h1>
+      <div class="stats-bar" id="stats-bar">
+        <span class="stat" id="stat-streak" title="Daily practice streak">🔥 0</span>
+        <span class="stat" id="stat-level" title="Level (from total XP)">Lv 1</span>
+        <span class="stat" id="stat-xp" title="Total XP earned">⭐ 0 XP</span>
+        <span class="stat" id="stat-accuracy" title="Overall accuracy">🎯 &ndash;%</span>
+      </div>
+    </div>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="practice">Practice</button>
+      <button class="tab-btn" data-tab="mock">Mock Test</button>
+      <button class="tab-btn" data-tab="progress">Progress</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- PRACTICE TAB -->
+    <section id="tab-practice" class="tab-panel active">
+      <div class="controls card">
+        <label>Exam
+          <select id="p-examtype">
+            <option>JEE Main</option>
+            <option>JEE Advanced</option>
+          </select>
+        </label>
+        <label>Subject
+          <select id="p-subject">
+            <option>Physics</option>
+            <option>Chemistry</option>
+            <option>Mathematics</option>
+          </select>
+        </label>
+        <label>Chapters
+          <div class="chapter-picker" id="p-chapter-picker">
+            <button type="button" id="p-chapter-btn" class="chapter-picker-btn">Random (all)</button>
+            <div id="p-chapter-panel" class="chapter-picker-panel hidden">
+              <div class="chapter-picker-actions">
+                <button type="button" id="p-chapter-clear">Clear (random)</button>
+              </div>
+              <div id="p-chapter-list" class="chapter-picker-list"></div>
+            </div>
+          </div>
+        </label>
+        <label>Difficulty
+          <select id="p-difficulty">
+            <option>Easy</option>
+            <option selected>Medium</option>
+            <option>Hard</option>
+            <option>Very Hard</option>
+          </select>
+        </label>
+        <label>Format
+          <select id="p-format"></select>
+        </label>
+        <button id="p-next" class="primary">Next Question</button>
+        <p class="hint">Each question is freshly generated and independently AI-verified on click &mdash; usually 15&ndash;90s.</p>
+      </div>
+
+      <div id="p-status" class="status"></div>
+      <div id="p-session-streak" class="session-streak hidden"></div>
+      <div id="p-question" class="question-card card hidden"></div>
+    </section>
+
+    <!-- MOCK TEST TAB -->
+    <section id="tab-mock" class="tab-panel">
+      <div class="controls card" id="mock-setup">
+        <label>Exam
+          <select id="m-examtype">
+            <option>JEE Main</option>
+            <option>JEE Advanced</option>
+          </select>
+        </label>
+        <label>Physics questions
+          <input type="number" id="m-physics" min="0" max="15" value="5" />
+        </label>
+        <label>Chemistry questions
+          <input type="number" id="m-chemistry" min="0" max="15" value="5" />
+        </label>
+        <label>Mathematics questions
+          <input type="number" id="m-math" min="0" max="15" value="5" />
+        </label>
+        <label>Difficulty
+          <select id="m-difficulty">
+            <option value="">Mixed</option>
+            <option>Easy</option>
+            <option selected>Medium</option>
+            <option>Hard</option>
+            <option>Very Hard</option>
+          </select>
+        </label>
+        <button id="m-start" class="primary">Start Mock Test</button>
+        <p class="hint" id="m-marking-hint"></p>
+      </div>
+
+      <div id="m-status" class="status"></div>
+      <form id="m-questions"></form>
+      <div id="m-actions" class="hidden">
+        <button id="m-submit" class="primary">Submit Test</button>
+      </div>
+      <div id="m-result" class="card hidden"></div>
+    </section>
+
+    <!-- PROGRESS TAB -->
+    <section id="tab-progress" class="tab-panel">
+      <div id="progress-summary" class="card"></div>
+      <button id="progress-reset">Reset Progress</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>Questions are freshly generated and independently cross-checked by AI in the style of the JEE exam pattern &mdash; originals, not reproductions from any book. Always confirm against your own working; report anything that looks wrong.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

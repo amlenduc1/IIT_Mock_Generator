@@ -1,0 +1,15 @@
+{
+  "name": "jee-mocktest-api",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/functions/*.js",
+  "scripts": {
+    "start": "func start"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.16.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,245 @@
+:root {
+  --bg: #0f1420;
+  --panel: #1a2133;
+  --panel-2: #222b41;
+  --text: #e8ecf5;
+  --muted: #9aa4bd;
+  --accent: #5b8cff;
+  --good: #35c07a;
+  --bad: #ef5a6f;
+  --border: #2c3550;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.topbar {
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.topbar-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+
+.topbar h1 { margin: 0; font-size: 1.15rem; }
+
+.stats-bar { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.stat {
+  background: var(--panel-2); border: 1px solid var(--border);
+  border-radius: 999px; padding: 0.2rem 0.6rem;
+  font-size: 0.78rem; font-weight: 600; white-space: nowrap;
+}
+#stat-streak.hot { border-color: #ff9f43; color: #ff9f43; }
+
+.tabs { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+.tab-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.82rem;
+}
+
+.tab-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+main { max-width: min(1600px, 96vw); margin: 0 auto; padding: 0.9rem; }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.controls { display: flex; flex-wrap: wrap; gap: 0.6rem 0.8rem; align-items: end; }
+/* Direct-child combinator (>) is deliberate here — a plain descendant
+   selector would also match the checkbox <label> rows nested inside the
+   chapter picker panel (they're descendants of .controls too), stretching
+   their height/width since .chapter-picker-list is itself a flex column. */
+.controls > label { flex: 1 1 140px; max-width: 260px; }
+.controls > label > select, .controls > label > .chapter-picker { width: 100%; }
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+select, input[type="number"], input[type="text"] {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.4rem 0.5rem;
+  border-radius: 7px;
+  font-size: 0.85rem;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--text);
+  padding: 0.45rem 0.85rem;
+  font-size: 0.82rem;
+}
+
+button.primary { background: var(--accent); border-color: var(--accent); color: white; font-weight: 600; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.hint { color: var(--muted); font-size: 0.72rem; margin: 0.4rem 0 0; width: 100%; }
+
+.queue-indicator { color: var(--good); font-size: 0.75rem; align-self: center; }
+.queue-indicator.loading { color: var(--muted); }
+
+.status { min-height: 1.3rem; color: var(--muted); margin-bottom: 0.75rem; font-size: 0.85rem; }
+
+.hidden { display: none !important; }
+
+.question-card .meta {
+  display: flex; gap: 0.4rem; flex-wrap: wrap;
+  font-size: 0.7rem; color: var(--muted); margin-bottom: 0.6rem;
+}
+.badge {
+  border: 1px solid var(--border); border-radius: 999px; padding: 0.1rem 0.5rem;
+}
+.badge.verified { border-color: var(--good); color: var(--good); }
+
+.q-text { font-size: 0.98rem; line-height: 1.5; margin-bottom: 0.75rem; white-space: pre-wrap; }
+
+.options { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.75rem; }
+
+.option-row {
+  display: flex; flex-direction: row; align-items: flex-start; gap: 0.6rem;
+  background: var(--panel-2); border: 1px solid var(--border);
+  border-radius: 7px; padding: 0.5rem 0.7rem; cursor: pointer;
+  font-size: 0.9rem; line-height: 1.4;
+}
+.option-row input[type="checkbox"], .option-row input[type="radio"] {
+  flex-shrink: 0; margin-top: 0.2rem;
+}
+.option-row.correct { border-color: var(--good); }
+.option-row.incorrect { border-color: var(--bad); }
+
+.numeric-answer { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.75rem; }
+.numeric-answer label { flex-direction: row; align-items: center; gap: 0.5rem; }
+
+.actions-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+
+.feedback { font-weight: 600; margin-bottom: 0.75rem; }
+.feedback.good { color: var(--good); }
+.feedback.bad { color: var(--bad); }
+
+.solution {
+  background: var(--panel-2); border: 1px dashed var(--border);
+  border-radius: 8px; padding: 1rem; margin-top: 0.5rem;
+}
+.solution ol { margin: 0.5rem 0 0; padding-left: 1.2rem; }
+.solution li { margin-bottom: 0.4rem; }
+.final-answer { margin-top: 0.75rem; font-weight: 700; color: var(--accent); }
+
+.mock-q { margin-bottom: 1.25rem; }
+
+footer { text-align: center; color: var(--muted); font-size: 0.75rem; padding: 1.5rem; }
+
+.progress-row { display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px solid var(--border); }
+
+/* Matrix Match */
+.matrix-match { margin-bottom: 1rem; }
+.matrix-row {
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  background: var(--panel-2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 0.6rem 0.8rem; margin-bottom: 0.5rem;
+}
+.matrix-row-label { flex: 1 1 220px; font-size: 0.9rem; }
+.matrix-row-choices { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.matrix-choice {
+  display: flex; flex-direction: row; align-items: center; gap: 0.3rem;
+  border: 1px solid var(--border); border-radius: 6px; padding: 0.25rem 0.5rem;
+  font-size: 0.85rem; cursor: pointer;
+}
+.matrix-choice.correct { border-color: var(--good); }
+.matrix-choice.incorrect { border-color: var(--bad); }
+.matrix-legend { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; line-height: 1.6; }
+
+/* Comprehension */
+.comprehension-paragraph {
+  background: var(--panel-2); border-left: 3px solid var(--accent);
+  padding: 0.8rem 1rem; margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.6;
+}
+.comprehension-subq { margin-bottom: 1rem; }
+
+.solution hr { border: none; border-top: 1px dashed var(--border); margin: 0.75rem 0; }
+
+/* Chapter multi-select picker */
+.chapter-picker { position: relative; }
+.chapter-picker-btn {
+  width: 100%; text-align: left;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.chapter-picker-panel {
+  position: absolute; z-index: 20; top: calc(100% + 4px); left: 0;
+  width: min(400px, 92vw); max-height: 340px; overflow-y: auto; overflow-x: hidden;
+  background: var(--panel-2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 0.5rem; box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.chapter-picker-actions { display: flex; justify-content: flex-end; margin-bottom: 0.35rem; }
+.chapter-picker-actions button { padding: 0.25rem 0.6rem; font-size: 0.72rem; }
+.chapter-picker-list { display: flex; flex-direction: column; gap: 0.1rem; }
+.chapter-picker-item {
+  display: flex; flex-direction: row; align-items: center; gap: 0.5rem;
+  padding: 0.35rem 0.5rem; border-radius: 6px; cursor: pointer; font-size: 0.82rem;
+}
+.chapter-picker-item input[type="checkbox"] { flex-shrink: 0; }
+/* Always keep checkbox + label on one line: truncate long names with an
+   ellipsis (full name available via the title tooltip) rather than wrap. */
+.chapter-picker-item span {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
+}
+.chapter-picker-item:hover { background: var(--panel); }
+
+/* Diagram rendering — capped so it reads as a textbook figure inset, not
+   a full-width banner that pushes the question below the fold. */
+.diagram-wrap {
+  background: #ffffff; border-radius: 8px; padding: 0.5rem;
+  margin-bottom: 0.75rem; display: flex; justify-content: center;
+}
+.diagram-wrap svg {
+  width: auto; height: auto;
+  max-width: min(380px, 100%); max-height: 240px;
+  display: block;
+}
+
+/* Session correct-streak banner */
+.session-streak {
+  font-size: 0.85rem; font-weight: 600; color: #ff9f43;
+  margin-bottom: 0.5rem;
+}
+
+/* Floating XP gain */
+.xp-pop {
+  position: fixed; z-index: 100; pointer-events: none;
+  font-weight: 700; font-size: 0.95rem; color: var(--good);
+  animation: xp-float 1.1s ease-out forwards;
+}
+@keyframes xp-float {
+  0% { opacity: 0; transform: translateY(0); }
+  15% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-28px); }
+}
